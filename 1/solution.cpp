@@ -46,9 +46,6 @@ vector<complexd> read_transform_matrix(ifstream &file)
 void make_single_qubit_transform(vector<complexd> &quantum_vector, 
         vector<complexd> &transform_matrix, int k)
 {
-    if (k < 0 || k > quantum_vector.size()) 
-        return;
-    
     long long k_qubit_num = 1ll << (k - 1);
 
     #pragma omp parallel for schedule(guided)
@@ -69,6 +66,9 @@ int main(int argc, char const *argv[])
     k = strtol(argv[2], NULL, 0);
     thread_num = strtol(argv[3], NULL, 0);
     omp_set_num_threads(thread_num);
+
+    if (k <= 0 || k > n)
+        return 1;
 
     ifstream matrix_file;
     matrix_file.open("matrix");
