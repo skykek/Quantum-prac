@@ -77,19 +77,11 @@ int main(int argc, char const *argv[])
 
     double time_start = omp_get_wtime();
     vector<complexd> quantum_vector = make_quantum_vector(n);
-
-    // for (unsigned long long i = 0; i < quantum_vector.size(); i++)
-    //     cout << quantum_vector[i] << ' ';
-    // cout << endl;
-
+    
     make_single_qubit_transform(quantum_vector, transform_matrix, k);
     double time_end = omp_get_wtime();
 
-    // for (unsigned long long i = 0; i < quantum_vector.size(); i++)
-    //     cout << quantum_vector[i] << ' ';
-    // cout << endl;
-
-    // cout << time_end - time_start << endl;
+    cout << time_end - time_start << endl;
 
     ofstream file;
     file.open("stats", ios::out | ios::app);
